@@ -115,6 +115,36 @@ class CommentsController extends GetxController{
        print(e.toString());
     }
     
+  }
+
+  LikeComment(String id)async{
+
+  var uid=authController.user.uid;
+   DocumentSnapshot doc= await fireStore
+   .collection("video").doc(PostId1)
+   .collection("comments").doc(id).get();
+
+
+   if((doc.data()! as dynamic)["likes"].contains(uid)){
+
+    await fireStore
+    .collection("videos").doc(PostId1)
+    .collection("comments").doc(id)
+    .update({"like":FieldValue.arrayRemove([uid])});
+
+   }else{
+
+    await fireStore
+    .collection("videos").doc(PostId1)
+    .collection("comments").doc(id)
+    .update({"likes":FieldValue.arrayUnion([uid])});
+   }
+
+
+
 
   }
+
+
+
 }

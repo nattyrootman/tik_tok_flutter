@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   },
                                   child: Icon(Icons.comment,size:40,color:Colors.white)),
                                   const SizedBox(height: 5),
-                                 Text("${data.commentsCount}")
+                                 Text("${data.commentsCount+1}")
                                ]),
                                 
                                 

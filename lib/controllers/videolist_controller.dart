@@ -39,10 +39,9 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
   
   
 
-  Stream<List<VideoModel>> getAllVideos(){
+  getAllVideos(){
 
-   return fireStore.collection("videos").snapshots()
-    .map((event) => event.docs.map((e) =>VideoModel.fromMap(e) ).toList());
+       
 
 
    }

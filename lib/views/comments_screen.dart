@@ -47,16 +47,23 @@ class CommentScreen extends  StatelessWidget {
               itemBuilder: (context,int index){
 
                var date=DateTime.now();
-               var data=  comment_controller.getCommentList;
+               var data=  comment_controller.getCommentList[index];
                 return ListTile(
 
                   leading: CircleAvatar(
                     radius: 50,
-                    child: Image.network(data[index].userPhoto,fit: BoxFit.cover,width: 50,height: 50)),
+                    child: Image.network(data.userPhoto,fit: BoxFit.cover,width: 50,height: 50)),
                   //Icon(Icons.person),
-                    title: Text(data[index].userName),
-                    subtitle: Text(data[index].comment),
-                  );
+                    title: Text(data.userName),
+                    subtitle: Text(data.comment),
+                     trailing: InkWell(
+                      onTap: (){
+
+                        comment_controller.LikeComment(data.id);
+                      },
+                      child:data.likes.contains(data.uid)? Icon( Icons.favorite,color:Colors.red)
+                      :Icon( Icons.favorite,color:Colors.white),
+                  ));
                        
                 
               }),

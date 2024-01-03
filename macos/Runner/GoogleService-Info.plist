@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDr2VhJF4YARoaCJYXiF-pO-Pa9LJI12tU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>993380711094</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.hopTock.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>hoptiktok-b9cba</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hoptiktok-b9cba.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:993380711094:ios:e43ef5e989e71d80a9c417</string>
+</dict>
+</plist>

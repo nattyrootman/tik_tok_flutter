@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "629245277294",
+    "project_id": "hoptok-addff",
+    "storage_bucket": "hoptok-addff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629245277294:android:11e2b901f770c67d88e27f",
+        "android_client_info": {
+          "package_name": "com.example.hop_tock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWt4enLgsVqVZykg7BbOnwTRxxcsNs7Ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

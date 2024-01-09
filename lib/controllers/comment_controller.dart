@@ -90,13 +90,15 @@ class CommentsController extends GetxController{
         likes: [], 
         userPhoto: (userDoc.data()!as Map<String,dynamic>)["userPhoto"]) ;
 
-        await fireStore.collection("videos").doc(PostId1).collection("comments").doc("${allDoc.docs.length}").set(comments.tojson())
+        await fireStore.collection("videos").doc(PostId1)
+        .collection("comments").doc("${allDoc.docs.length}").set(comments.tojson())
         .whenComplete(() => print("Bravo files are loadedd"));
 
       DocumentSnapshot doc=   await fireStore.collection("videos").doc(PostId1).get();
+             
 
         await fireStore.collection("videos").doc(PostId1).update({
-          'commentsCount': (doc.data()!as Map<String , dynamic>)['commentsCount'] + 1 });
+          'commentsCount': (doc.data()!as dynamic)['commentsCount']++});
 
 
     }else{
@@ -118,19 +120,20 @@ class CommentsController extends GetxController{
   }
 
   LikeComment(String id)async{
-
+   
+   try{
   var uid=authController.user.uid;
    DocumentSnapshot doc= await fireStore
-   .collection("video").doc(PostId1)
+   .collection("videos").doc(PostId1)
    .collection("comments").doc(id).get();
 
 
-   if((doc.data()! as dynamic)["likes"].contains(uid)){
+   if((doc.data()! as dynamic)["likes"]){
 
     await fireStore
     .collection("videos").doc(PostId1)
     .collection("comments").doc(id)
-    .update({"like":FieldValue.arrayRemove([uid])});
+    .update({"likes":FieldValue.arrayRemove([uid])});
 
    }else{
 
@@ -139,8 +142,14 @@ class CommentsController extends GetxController{
     .collection("comments").doc(id)
     .update({"likes":FieldValue.arrayUnion([uid])});
    }
-
-
+    
+   }on FirebaseException catch (e) {
+        print(e.message);
+      
+    }catch (e){
+       
+       print(e.toString());
+    }
 
 
   }

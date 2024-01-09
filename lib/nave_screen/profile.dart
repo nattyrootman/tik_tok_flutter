@@ -1,20 +1,45 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:hop_tock/constants/firebase_instance.dart';
+import 'package:hop_tock/controllers/profile_controller.dart';
 import 'package:hop_tock/widgets/button.dart';
 
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+
+  final String? uid;
+  const ProfileScreen({super.key,this.uid});
 
   @override
   State<ProfileScreen> createState() => _nameState();
 }
 
 class _nameState extends State<ProfileScreen> {
+
+   final profileController=Get.put( ControllerProfile());
+
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    profileController.UpDateProfile(widget.uid!);
+  }
   @override
   Widget build(BuildContext context) {
+
+  return GetBuilder< ControllerProfile>(
+    init:  ControllerProfile(),
+    builder: (controller){
+
+      //if(profileController.userFollowers.userName.isEmpty){
+        
+       // return Center(child: CircularProgressIndicator());
+      //}
+
     return Scaffold(
 
 
@@ -25,7 +50,7 @@ class _nameState extends State<ProfileScreen> {
 
         child:Text("Log out"))),
          
-      body: SingleChildScrollView(
+      body:SingleChildScrollView(
         child: Column(
         //  mainAxisAlignment: MainAxisAlignment.center,
          
@@ -56,7 +81,7 @@ class _nameState extends State<ProfileScreen> {
 
                   Center(child: Image.asset("assets/avatar.png")),
                     SizedBox(height: 10),
-                  Text("@love")
+                  Text(profileController.userFollowers.userName),
                 ],
               )),
                 SizedBox(height: 10),
@@ -66,12 +91,12 @@ class _nameState extends State<ProfileScreen> {
                   children: [
 
                       Column(children: [
-                         Text("150",style: TextStyle(color: Colors.white)),
+                         Text('${profileController.userFollowers.following}',style: TextStyle(color: Colors.white)),
                           Text("Abonnements",style: TextStyle(color: Colors.grey.shade300)),
                       ],),
 
                       Column(children: [
-                         Text("1500.5k"),
+                         Text(profileController.userFollowers.toString()),
                           Text("Abonnés",style: TextStyle(color: Colors.grey.shade300)),
                       ],),
 
@@ -83,12 +108,17 @@ class _nameState extends State<ProfileScreen> {
                 ],),
                  SizedBox(height: 15),
 
-                ButtonWidget()
+                ButtonWidget(uid:widget.uid)
                 
 
           ],
         ),
-      ),
+      )
+   
     );
+    
+  
+     });
+     
   }
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hop_tock/constants/firebase_instance.dart';
 import 'package:hop_tock/models/user_model.dart';
 import 'package:hop_tock/models/video_model.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class VideoListController extends  GetxController{
 
@@ -15,7 +16,7 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
 
 
 
-     List<VideoModel>myList=[];
+    // List<VideoModel>myList=[];
 
 
 
@@ -28,7 +29,23 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
     super.onInit();
 
       
-      videoList.bindStream(getAllVideos());
+      videoList.bindStream(
+
+
+        fireStore.collection("videos")
+         .snapshots().map((event) {
+            List<VideoModel>myList=[];
+          for (var element in event.docs) {
+
+            myList.add(VideoModel.fromMap(element));
+            
+          }
+          
+          return myList;
+        
+
+         })
+      );
 
 
   }
@@ -39,12 +56,7 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
   
   
 
-  getAllVideos(){
 
-       
-
-
-   }
 
       LikingVideo(String id)async{
           
@@ -54,8 +66,7 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
       
 
       var uid=authController.user.uid;
-       String uid1= firebaseAuth.currentUser!.uid;
-
+      
       DocumentSnapshot  userDoc=await fireStore.collection("videos").doc(id).get();
 
           var likesDoc=(userDoc.data()! as  dynamic)['likes'];
@@ -68,8 +79,8 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
                 .whenComplete(() => print("its updated")).onError((error, stackTrace) => print(error));
                   
          }else{
-                    
-             await fireStore.collection("videos").doc(id).update({'likes':FieldValue.arrayUnion([uid])});
+              
+             await fireStore.collection("videos").doc(id).set({'likes':FieldValue.arrayUnion([uid])});
 
            print("nothin is added");
          }
@@ -79,9 +90,6 @@ final Rx<List<VideoModel>>videoList=Rx<List<VideoModel>>([]);
          Get.snackbar("title:", e.message!);
          print(e.message);
 
-           
-      
-    
          } catch (e) {
             
 

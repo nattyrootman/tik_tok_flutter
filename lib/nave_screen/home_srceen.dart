@@ -198,14 +198,18 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                Column(children:[
                                 InkWell(
                                   onTap:()async{
-                                       
-                                          
+
+                                       var uid=authController.user.uid;
+                                         
+
+
                                             videolist.LikingVideo(data.id);
                                                
                                         
                                   },
                                   
                                   child: Icon(Icons.favorite,size:40,
+                    
                                   color:data.likes.contains(data.uid)?Colors.red:Colors.white)),
                                   const SizedBox(height: 5),
                                  Text(data.likes.length.toString())
@@ -221,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   },
                                   child: Icon(Icons.comment,size:40,color:Colors.white)),
                                   const SizedBox(height: 5),
-                                 Text("${data.commentsCount+1}")
+                                 Text("${data.commentsCount}")
                                ]),
                                 
                                 

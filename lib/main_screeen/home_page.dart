@@ -9,6 +9,8 @@ import 'package:hop_tock/nave_screen/message.dart';
 import 'package:hop_tock/nave_screen/profile.dart';
 import 'package:hop_tock/nave_screen/search.dart';
 
+import 'package:hop_tock/constants/firebase_instance.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -26,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const SearchScreen(),
     const AddVideoScreen(),
     const MessageScreen(),
-    const ProfileScreen()
+     ProfileScreen(uid: authController.user.uid,)
 
   ];
 

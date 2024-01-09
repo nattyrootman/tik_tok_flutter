@@ -108,7 +108,7 @@ class UploadVideoController extends GetxController{
      var videoModel=VideoModel(userName:(userDoc.data()! as Map<String, dynamic>)['userName'],
              uid: uid,
              id:videoId,
-             likes: [0],
+             likes: [],
              commentsCount: 0, 
              shareCount: 0, 
              songName: songName,

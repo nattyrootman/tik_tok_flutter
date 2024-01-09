@@ -51,16 +51,16 @@ class VideoModel {
     };
   }
 
-  static  VideoModel fromMap(DocumentSnapshot<Map<String, dynamic>> docs) {
-    var snapshot=docs.data();
+  static  VideoModel fromMap(DocumentSnapshot docs) {
+    var snapshot=docs.data() as  Map<String, dynamic> ;
 
         
 
       return VideoModel(
-      userName: snapshot!['userName']??"userName",
+      userName: snapshot['userName']??"userName",
       uid: snapshot['uid']??"uid",
       id: snapshot['id']??"id",
-      likes: snapshot['likes'] as List ,
+      likes: snapshot['likes'] ,
       commentsCount: snapshot['commentsCount']??0,
       shareCount: snapshot['shareCount']??0,
       songName: snapshot['songName']??"songName",
